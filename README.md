@@ -1,5 +1,7 @@
 # pycatj
 
+Flattens json/yaml files into python compatible paths
+
 ## Installation
 
 ```
@@ -20,6 +22,8 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --format {json,yaml}  Format of the file
+  --root ROOT           This is the root of your path, the var where you will
+                        load your data
 
 $ cat tests/data/test_1.json
 {
@@ -35,15 +39,15 @@ $ cat tests/data/test_1.json
     }
 }
 
-$ pycatj tests/data/test_1.json
-root["somekey"] = "somevalue"
-root["somenumber"] = 123
-root["a_dict"]["asd"] = "123"
-root["a_dict"]["qwe"][0] = 1
-root["a_dict"]["qwe"][1] = 2
-root["a_dict"]["qwe"][2] = 3
-root["a_dict"]["nested_dict"]["das"] = 31
-root["a_dict"]["nested_dict"]["qwe"] = "asd"
+$ pycatj --root my_var tests/data/test_1.json
+my_var["somekey"] = "somevalue"
+my_var["somenumber"] = 123
+my_var["a_dict"]["asd"] = "123"
+my_var["a_dict"]["qwe"][0] = 1
+my_var["a_dict"]["qwe"][1] = 2
+my_var["a_dict"]["qwe"][2] = 3
+my_var["a_dict"]["nested_dict"]["das"] = 31
+my_var["a_dict"]["nested_dict"]["qwe"] = "asd"
 
 $ cat tests/data/test_1.yaml
 ---
@@ -58,13 +62,14 @@ $ cat tests/data/test_1.yaml
     "nested_dict":
         "das": 31
         "qwe": "asd"
-(testpcatj) ‚ûú  pycatj git:(master) ‚úó pycatj tests/data/test_1.yaml
-root["somekey"] = "somevalue"
-root["somenumber"] = 123
-root["a_dict"]["asd"] = "123"
-root["a_dict"]["qwe"][0] = 1
-root["a_dict"]["qwe"][1] = 2
-root["a_dict"]["qwe"][2] = 3
-root["a_dict"]["nested_dict"]["das"] = 31
-root["a_dict"]["nested_dict"]["qwe"] = "asd"
+
+$ pycatj --root my_var tests/data/test_1.yaml
+my_var["somekey"] = "somevalue"
+my_var["somenumber"] = 123
+my_var["a_dict"]["asd"] = "123"
+my_var["a_dict"]["qwe"][0] = 1
+my_var["a_dict"]["qwe"][1] = 2
+my_var["a_dict"]["qwe"][2] = 3
+my_var["a_dict"]["nested_dict"]["das"] = 31
+my_var["a_dict"]["nested_dict"]["qwe"] = "asd"
 ```

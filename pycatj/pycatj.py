@@ -37,7 +37,7 @@ def process_dict(data: Dict[str, Any], path: str, result: io.StringIO) -> None:
             process_element(v, new_path, result)
 
 
-def process_file(filepath: pathlib.Path, mode: str) -> str:
+def process_file(filepath: pathlib.Path, mode: str, root: str) -> str:
     result = io.StringIO()
 
     if mode == "json":
@@ -50,5 +50,5 @@ def process_file(filepath: pathlib.Path, mode: str) -> str:
     with open(filepath, "r") as f:
         data = loader(f)
 
-    process_dict(data, "root", result)
+    process_dict(data, root, result)
     return result.getvalue()

@@ -15,13 +15,19 @@ def main() -> None:
         choices=["json", "yaml"],
         help="Format of the file",
     )
+    parser.add_argument(
+        "--root",
+        dest="root",
+        default="root",
+        help="This is the root of your path, the var where you will load your data",
+    )
     args = parser.parse_args()
 
     filepath = pathlib.Path(args.filepath)
     file_format = args.file_format
     if not file_format:
         file_format = filepath.suffix[1:]
-    print(pycatj.process_file(filepath, file_format))
+    print(pycatj.process_file(filepath, file_format, args.root))
 
 
 if __name__ == "__main__":
